@@ -1,0 +1,33 @@
+<div class="holy-grail-container">
+  <!-- Header (sempre visibile) -->
+  <app-header 
+    [isMobile]="isMobile()"
+    (menuToggle)="toggleSidenav()">
+  </app-header>
+
+  <!-- Sidenav Container (barra laterale + contenuto) -->
+  <mat-sidenav-container class="sidenav-container">
+    
+    <!-- Sidebar Navigation -->
+    <mat-sidenav 
+      #sidenav
+      [mode]="isMobile() ? 'over' : 'side'"
+      [opened]="sidenavOpened()"
+      [fixedInViewport]="isMobile()"
+      class="sidenav">
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+
+    <!-- Main Content Area -->
+    <mat-sidenav-content class="main-content">
+      <div class="content-wrapper">
+        <!-- Qui verrà renderizzato il contenuto delle varie pagine -->
+        <router-outlet></router-outlet>
+      </div>
+      
+      <!-- Footer -->
+      <app-footer></app-footer>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>
+</div>

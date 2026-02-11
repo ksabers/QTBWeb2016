@@ -1,0 +1,36 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 18px;
+  transition: opacity 0.2s;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .logo-text {
+    @media (max-width: 599px) {
+      display: none; // Nasconde il testo su mobile
+    }
+  }
+}
+
+.spacer {
+  flex: 1;
+}

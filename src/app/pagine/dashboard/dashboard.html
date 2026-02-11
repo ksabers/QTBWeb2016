@@ -1,0 +1,49 @@
+<div class="dashboard">
+  <h1 class="title">
+    <mat-icon>flight</mat-icon>
+    Flight Logbook - Dashboard
+  </h1>
+
+  <div class="grid">
+    <mat-card class="card highlight">
+      <mat-card-title>Voli totali</mat-card-title>
+      <mat-card-content>
+        <div class="value">{{ totalFlights() }}</div>
+        <div class="subtitle">Registrati nel logbook</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-title>Ore di volo</mat-card-title>
+      <mat-card-content>
+        <div class="value">{{ totalHours() }}</div>
+        <div class="subtitle">Ore complessive</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-title>Ultimo volo</mat-card-title>
+      <mat-card-content>
+        @if (lastFlightDate()) {
+          <div class="value small">
+            {{ lastFlightDate() | date: 'dd/MM/yyyy' }}
+          </div>
+        } @else {
+          <div class="value small">Nessun volo registrato</div>
+        }
+        <div class="subtitle">Data</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button color="primary">
+      <mat-icon>add</mat-icon>
+      Nuovo volo (prossimamente)
+    </button>
+    <button mat-stroked-button color="primary">
+      <mat-icon>list</mat-icon>
+      Elenco voli (prossimamente)
+    </button>
+  </div>
+</div>
