@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
-import { AuthService } from '../servizi/auth/auth';
+import { AuthService } from '../auth/auth';
 
 export const voloAttivoGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout/main-layout';
-import { authGuard } from './guards/auth-guard';
-import { voloAttivoGuard } from './guards/volo-attivo-guard';
+import { authGuard } from './auth/auth-guard';
+import { voloAttivoGuard } from './auth/volo-attivo-guard';
 
 export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./auth/login/login').then(m => m.Login) },

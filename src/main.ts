@@ -4,9 +4,9 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAppInitializer, inject } from '@angular/core';
 import { routes } from './app/app.routes';
 import { App } from './app/app';
-import { Config } from './app/servizi/config/config';
-import { apiBaseUrlInterceptor } from './app/interceptors/api-base-url/api-base-url-interceptor';
-import { jwtInterceptor } from './app/interceptors/jwt/jwt-interceptor';
+import { Config } from './app/config/config';
+import { apiBaseUrlInterceptor } from './app/auth/api-base-url-interceptor';
+import { jwtInterceptor } from './app/auth/jwt-interceptor';
 
 bootstrapApplication(App, {
   providers: [
