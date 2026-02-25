@@ -1,0 +1,165 @@
+.aeroporti-container {
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .filter-field {
+    width: 300px;
+    margin-bottom: -1.25em; // Compensazione per mat-form-field
+  }
+
+  .add-button {
+    height: 40px;
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.table-container {
+  flex: 1;
+  overflow: auto;
+  border-radius: 4px;
+}
+
+.aeroporti-table {
+  width: 100%;
+  background: white;
+
+  // Stile header
+  .mat-header-cell {
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .mat-cell {
+    font-size: 14px;
+  }
+
+  // Colonna azioni senza padding header
+  .actions-header {
+    width: 120px;
+    padding-right: 16px !important;
+  }
+}
+
+// Stile righe con hover
+.table-row {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+
+    // Mostra i pulsanti azioni solo al hover
+    .action-buttons {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+// Cella coordinate cliccabile
+.coordinate-cell {
+  .coordinate-button {
+    color: #1976d2;
+    
+    &:hover {
+      color: #1565c0;
+      background-color: rgba(25, 118, 210, 0.08);
+    }
+  }
+
+  .no-coordinates {
+    color: rgba(0, 0, 0, 0.38);
+  }
+}
+
+// Pulsanti azioni (nascosti di default)
+.actions-cell {
+  text-align: right;
+  padding-right: 8px !important;
+
+  .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+
+    .action-button {
+      width: 36px;
+      height: 36px;
+      
+      mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+// Riga quando non ci sono dati
+.no-data {
+  text-align: center;
+  padding: 32px !important;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: italic;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex-direction: column;
+
+    .filter-field {
+      width: 100%;
+    }
+
+    .add-button {
+      width: 100%;
+    }
+  }
+
+  // Su mobile mostra sempre i pulsanti azioni
+  .actions-cell .action-buttons {
+    opacity: 1;
+    visibility: visible;
+  }
+}

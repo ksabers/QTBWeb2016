@@ -30,6 +30,12 @@ export const routes: Routes = [
       { 
         path: 'voli/chiusura/:id',
         loadComponent: () => import('./pagine/voli/chiusura/chiusura').then(m => m.Chiusura)
+      },
+
+            // 4. Aeroporti
+      {
+        path: 'lista-aeroporti',
+        loadComponent: () => import('./pagine/aeroporti/lista-aeroporti/lista-aeroporti').then(m => m.ListaAeroporti)
       }
     ]
   },

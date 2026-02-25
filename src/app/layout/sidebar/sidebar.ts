@@ -44,6 +44,11 @@ export class Sidebar {
       route: '/aircraft'
     },
     {
+      label: 'Aeroporti',
+      icon: 'multiple_airports',
+      route: '/lista-aeroporti'
+    },
+    {
       label: 'Piloti',
       icon: 'people',
       route: '/pilots'
