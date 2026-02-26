@@ -7,6 +7,7 @@ import { Config } from '../../../config/config';
 @Injectable({
   providedIn: 'root'
 })
+
 export class AeroportiService {
   private http = inject(HttpClient);
   private config = inject(Config);
@@ -22,5 +23,13 @@ export class AeroportiService {
 
   deleteAeroporto(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  createAeroporto(aeroporto: Partial<ModelloAeroporto>): Observable<ModelloAeroporto> {
+    return this.http.post<ModelloAeroporto>(this.apiUrl, aeroporto);
+  }
+
+  updateAeroporto(id: number, aeroporto: Partial<ModelloAeroporto>): Observable<ModelloAeroporto> {
+    return this.http.put<ModelloAeroporto>(`${this.apiUrl}/${id}`, aeroporto);
   }
 }

@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AeroportiService } from '../service/aeroporti-service';
 import { ModelloAeroporto } from '../modello/modello-aeroporto';
+import { DialogAeroporti } from '../dialog-aeroporti/dialog-aeroporti';
 
 @Component({
   selector: 'app-lista-aeroporti',
@@ -100,9 +101,35 @@ export class ListaAeroporti implements OnInit {
     }
   }
 
+    // Bottone "Nuovo Aeroporto"
+  // Bottone "Nuovo Aeroporto"
+  onAdd(): void {
+    const dialogRef = this.dialog.open(DialogAeroporti, {
+      width: '600px',
+      data: null // nessun dato = modalità inserimento
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Chiamata POST al backend
+        this.aeroportiService.createAeroporto(result).subscribe({
+          next: () => {
+            this.snackBar.open('Aeroporto creato con successo', 'Chiudi', { duration: 3000 });
+            this.loadAeroporti();
+          },
+          error: (err) => {
+            this.snackBar.open('Errore nella creazione', 'Chiudi', { duration: 3000 });
+          }
+        });
+      }
+    });
+  }
+
   onEdit(aeroporto: ModelloAeroporto): void {
-    // TODO: Aprire dialog di modifica (implementeremo dopo)
-    console.log('Edit aeroporto:', aeroporto);
+    const dialogRef = this.dialog.open(DialogAeroporti, {
+      width: '600px',
+      data: aeroporto // passa aeroporto esistente = modalità modifica
+    });
   }
 
   onDelete(aeroporto: ModelloAeroporto): void {

@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome *</mat-label>
+        <input matInput formControlName="nome" />
+        @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+          <mat-error>Nome obbligatorio</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Denominazione</mat-label>
+        <input matInput formControlName="denominazione" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row two-columns">
+      <mat-form-field appearance="outline">
+        <mat-label>ICAO</mat-label>
+        <input matInput formControlName="icao" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>IATA</mat-label>
+        <input matInput formControlName="iata" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Coordinate</mat-label>
+        <input matInput formControlName="coordinate" 
+               placeholder="44° 24' 41.2&quot; N - 08° 07' 15.2&quot; E" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row two-columns">
+      <mat-form-field appearance="outline">
+        <mat-label>Città</mat-label>
+        <input matInput formControlName="citta" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Provincia</mat-label>
+        <input matInput formControlName="provincia" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nazione</mat-label>
+        <input matInput formControlName="nazione" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-checkbox formControlName="asfalto">Pista asfaltata</mat-checkbox>
+    </div>
+
+    <!-- Altri campi: qnh, qfu, lunghezza, radio, etc. -->
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Annulla</button>
+  <button mat-raised-button color="primary" (click)="onSave()">
+    {{ isEdit ? 'Salva' : 'Crea' }}
+  </button>
+</mat-dialog-actions>
+
