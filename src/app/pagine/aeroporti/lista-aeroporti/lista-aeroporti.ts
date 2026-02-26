@@ -41,8 +41,8 @@ export class ListaAeroporti implements OnInit {
   private snackBar = inject(MatSnackBar);
 
   displayedColumns: string[] = [
-    'codiceICAO',
-    'codiceIATA', 
+    'icao',
+    'iata', 
     'nome',
     'citta',
     'nazione',
@@ -64,6 +64,7 @@ export class ListaAeroporti implements OnInit {
     this.isLoading = true;
     this.aeroportiService.getAeroporti().subscribe({
       next: (data) => {
+        console.log('data: ' + data[0].nome);
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
