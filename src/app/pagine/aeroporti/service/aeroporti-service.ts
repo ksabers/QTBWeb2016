@@ -5,9 +5,8 @@ import { ModelloAeroporto } from '../modello/modello-aeroporto';
 import { Config } from '../../../config/config';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AeroportiService {
   private http = inject(HttpClient);
   private config = inject(Config);

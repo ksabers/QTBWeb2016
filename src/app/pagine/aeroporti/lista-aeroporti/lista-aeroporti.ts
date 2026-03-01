@@ -1,4 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
@@ -31,10 +38,10 @@ import { DialogAeroporti } from '../dialog-aeroporti/dialog-aeroporti';
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   templateUrl: './lista-aeroporti.html',
-  styleUrls: ['./lista-aeroporti.scss']
+  styleUrls: ['./lista-aeroporti.scss'],
 })
 export class ListaAeroporti implements OnInit, AfterViewInit {
   private aeroportiService = inject(AeroportiService);
@@ -44,12 +51,12 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = [
     'icao',
-    'iata', 
+    'iata',
     'nome',
     'citta',
     'nazione',
     'coordinate',
-    'actions'
+    'actions',
   ];
 
   dataSource = new MatTableDataSource<ModelloAeroporto>([]);
@@ -71,26 +78,28 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
   loadAeroporti(): void {
     this.isLoading = true;
     this.cdr.detectChanges();
-    
+
     this.aeroportiService.getAeroporti().subscribe({
       next: (data) => {
         console.log('✅ Dati ricevuti:', data.length, 'aeroporti');
-        
+
         this.dataSource.data = data;
-        
+
         // Configurazione filtro personalizzato
         this.dataSource.filterPredicate = (data: ModelloAeroporto, filter: string) => {
           const searchStr = filter.toLowerCase();
-          return data.icao?.toLowerCase().includes(searchStr) ||
-                 data.iata?.toLowerCase().includes(searchStr) ||
-                 data.nome?.toLowerCase().includes(searchStr) ||
-                 data.citta?.toLowerCase().includes(searchStr) ||
-                 data.nazione?.toLowerCase().includes(searchStr);
+          return (
+            data.icao?.toLowerCase().includes(searchStr) ||
+            data.iata?.toLowerCase().includes(searchStr) ||
+            data.nome?.toLowerCase().includes(searchStr) ||
+            data.citta?.toLowerCase().includes(searchStr) ||
+            data.nazione?.toLowerCase().includes(searchStr)
+          );
         };
-        
+
         this.isLoading = false;
         this.cdr.detectChanges();
-        
+
         // Riassegna paginator e sort dopo aver caricato nuovi dati
         if (this.paginator && this.sort) {
           this.dataSource.paginator = this.paginator;
@@ -100,11 +109,11 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
       error: (error) => {
         console.error('❌ Errore nel caricamento aeroporti:', error);
         this.snackBar.open('Errore nel caricamento degli aeroporti', 'Chiudi', {
-          duration: 3000
+          duration: 3000,
         });
         this.isLoading = false;
         this.cdr.detectChanges();
-      }
+      },
     });
   }
 
@@ -120,10 +129,10 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
   onAdd(): void {
     const dialogRef = this.dialog.open(DialogAeroporti, {
       width: '600px',
-      data: null
+      data: null,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.aeroportiService.createAeroporto(result).subscribe({
           next: () => {
@@ -132,7 +141,7 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
           },
           error: (err) => {
             this.snackBar.open('Errore nella creazione', 'Chiudi', { duration: 3000 });
-          }
+          },
         });
       }
     });
@@ -141,10 +150,10 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
   onEdit(aeroporto: ModelloAeroporto): void {
     const dialogRef = this.dialog.open(DialogAeroporti, {
       width: '600px',
-      data: aeroporto
+      data: aeroporto,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.aeroportiService.updateAeroporto(aeroporto.id, result).subscribe({
           next: () => {
@@ -152,8 +161,8 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
             this.loadAeroporti();
           },
           error: (err) => {
-            this.snackBar.open('Errore nell\'aggiornamento', 'Chiudi', { duration: 3000 });
-          }
+            this.snackBar.open("Errore nell'aggiornamento", 'Chiudi', { duration: 3000 });
+          },
         });
       }
     });
@@ -164,16 +173,16 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
       this.aeroportiService.deleteAeroporto(aeroporto.id).subscribe({
         next: () => {
           this.snackBar.open('Aeroporto eliminato con successo', 'Chiudi', {
-            duration: 3000
+            duration: 3000,
           });
           this.loadAeroporti();
         },
         error: (error) => {
-          console.error('Errore nell\'eliminazione:', error);
-          this.snackBar.open('Errore nell\'eliminazione dell\'aeroporto', 'Chiudi', {
-            duration: 3000
+          console.error("Errore nell'eliminazione:", error);
+          this.snackBar.open("Errore nell'eliminazione dell'aeroporto", 'Chiudi', {
+            duration: 3000,
           });
-        }
+        },
       });
     }
   }
@@ -184,12 +193,12 @@ export class ListaAeroporti implements OnInit, AfterViewInit {
       // TODO: Implementare dialog con mappa
     } else {
       this.snackBar.open('Coordinate non disponibili per questo aeroporto', 'Chiudi', {
-        duration: 3000
+        duration: 3000,
       });
     }
   }
 
   hasCoordinates(aeroporto: ModelloAeroporto): boolean {
-    return !!(aeroporto.coordinate);
+    return !!aeroporto.coordinate;
   }
 }

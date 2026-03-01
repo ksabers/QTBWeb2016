@@ -2,23 +2,20 @@
   <!-- Header con filtro -->
   <div class="table-header">
     <h2>Gestione Aeroporti</h2>
-    
+
     <div class="header-actions">
       <mat-form-field appearance="outline" class="filter-field">
         <mat-label>Cerca aeroporto</mat-label>
-        <input 
-          matInput 
-          (keyup)="applyFilter($event)" 
+        <input
+          matInput
+          (keyup)="applyFilter($event)"
           placeholder="Cerca per codice, nome, città..."
-          #input>
+          #input
+        />
         <mat-icon matPrefix>search</mat-icon>
       </mat-form-field>
 
-      <button 
-        mat-raised-button 
-        color="primary" 
-        class="add-button"
-        (click)="onAdd()">
+      <button mat-raised-button color="primary" class="add-button" (click)="onAdd()">
         <mat-icon>add</mat-icon>
         Nuovo Aeroporto
       </button>
@@ -31,7 +28,7 @@
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
   }
-  
+
   <!-- Tabella -->
   @if (!isLoading) {
     <div class="table-container">
@@ -39,7 +36,9 @@
         <!-- Colonna Codice ICAO -->
         <ng-container matColumnDef="icao">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Codice ICAO</th>
-          <td mat-cell *matCellDef="let aeroporto"><strong>{{ aeroporto.icao || '-' }}</strong></td>
+          <td mat-cell *matCellDef="let aeroporto">
+            <strong>{{ aeroporto.icao || '-' }}</strong>
+          </td>
         </ng-container>
 
         <!-- Colonna Codice IATA -->
@@ -51,7 +50,7 @@
         <!-- Colonna Nome -->
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-          <td mat-cell *matCellDef="let aeroporto">{{ aeroporto.nome || '-'}}</td>
+          <td mat-cell *matCellDef="let aeroporto">{{ aeroporto.nome || '-' }}</td>
         </ng-container>
 
         <!-- Colonna Città -->
@@ -71,12 +70,15 @@
           <th mat-header-cell *matHeaderCellDef>Coordinate</th>
           <td mat-cell *matCellDef="let aeroporto" class="coordinate-cell">
             @if (hasCoordinates(aeroporto)) {
-              <button mat-icon-button (click)="onViewMap(aeroporto)"
-                      matTooltip="Visualizza su mappa" class="coordinate-button">
+              <button
+                mat-icon-button
+                (click)="onViewMap(aeroporto)"
+                matTooltip="Visualizza su mappa"
+                class="coordinate-button"
+              >
                 <mat-icon>location_on</mat-icon>
               </button>
-            }
-            @else {
+            } @else {
               <span class="no-coordinates">-</span>
             }
           </td>
@@ -87,12 +89,22 @@
           <th mat-header-cell *matHeaderCellDef class="actions-header"></th>
           <td mat-cell *matCellDef="let aeroporto" class="actions-cell">
             <div class="action-buttons">
-              <button mat-icon-button (click)="onEdit(aeroporto)"
-                      matTooltip="Modifica" color="primary" class="action-button">
+              <button
+                mat-icon-button
+                (click)="onEdit(aeroporto)"
+                matTooltip="Modifica"
+                color="primary"
+                class="action-button"
+              >
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="onDelete(aeroporto)"
-                      matTooltip="Elimina" color="warn" class="action-button">
+              <button
+                mat-icon-button
+                (click)="onDelete(aeroporto)"
+                matTooltip="Elimina"
+                color="warn"
+                class="action-button"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -101,7 +113,7 @@
 
         <!-- Definizione righe -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table-row"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" class="table-row"></tr>
 
         <!-- Riga quando non ci sono dati -->
         <tr class="mat-row" *matNoDataRow>
@@ -112,11 +124,12 @@
       </table>
 
       <!-- Paginatore -->
-      <mat-paginator 
-        [pageSizeOptions]="[10, 25, 50, 100]" 
+      <mat-paginator
+        [pageSizeOptions]="[10, 25, 50, 100]"
         [pageSize]="25"
-        showFirstLastButtons 
-        aria-label="Seleziona pagina">
+        showFirstLastButtons
+        aria-label="Seleziona pagina"
+      >
       </mat-paginator>
     </div>
   }
